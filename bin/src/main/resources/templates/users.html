@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Users</title>
+    <link rel="stylesheet"  type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div><h1>Manage Users</h1></div>
+    <div>
+        <a th:href="@{/user/new}" class="h2 btn-info btn-sm mb-5">Add new user</a>
+    </div>
+    <div th:if="${message}" class="alert alert-success text-ceter">
+        [[${message}]]
+    </div>
+    <div>
+        <table class="table table-bordered ">
+            <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>E-mail</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Enabled</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="user: ${listUsers}">
+                <tr>
+                    <td>[[${user.id}]]</td>
+                    <td>[[${user.email}]]</td>
+                    <td>[[${user.firstName}]]</td>
+                    <td>[[${user.lastName}]]</td>
+                    <td>[[${user.enabled}]]</td>
+                    <td>
+                        <a th:href="@{'/user/edit/'+${user.id}}">
+                            <button class="btn btn-sm btn-primary">Edit</button>
+                        </a>
+                        <a th:href="@{'/user/delete/'+${user.id}}">
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
